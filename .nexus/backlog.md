@@ -5,8 +5,8 @@
 - [x] Enable `strict: true` in `tsconfig.app.json`.
 - [x] Create `/api` folder for the serverless proxy.
 - [x] `.env.example` for `FOOTBALL_DATA_API_KEY`, `.env`/`.env.local` gitignored.
-- [ ] Get a football-data.org API key.
-- [ ] Design mockups (Stitch AI).
+- [x] Get a football-data.org API key.
+- [x] Design mockups (Stitch AI).
 
 ## MVP
 - [ ] `/api` proxy route(s) to football-data.org.
