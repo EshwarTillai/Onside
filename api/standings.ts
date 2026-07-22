@@ -1,5 +1,8 @@
+export const config = {
+    runtime: "edge",  
+};
 export default async function  handler(request:Request):Promise<Response> {
-    const {searchParams} = new URL(request.url)
+    const {searchParams} = new URL(request.url, "http://localhost")
     const competition = searchParams.get("competition")
     const existingCompetition = ["PL","SA","PD","BL1", "FL1"]
     const base_url = "https://api.football-data.org"
