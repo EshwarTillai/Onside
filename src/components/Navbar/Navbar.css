@@ -5,7 +5,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom:1px solid var(--accent-color)
+  border-bottom:1px solid var(--accent-color);
+  -webkit-box-shadow: 5px 25px 50px -8px rgba(33,33,33,0.88); 
+  box-shadow: 5px 25px 50px -8px rgba(33,33,33,0.88);
+  padding: 6px ;
 }
 .theme-toggle {
     position: relative;

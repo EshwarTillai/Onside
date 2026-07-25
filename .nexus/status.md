@@ -1,6 +1,6 @@
 # Status — Onside
 
-**Last updated:** 2026-07-22.
+**Last updated:** 2026-07-25.
 
 ## Where things stand
 
@@ -11,9 +11,9 @@
   - Both run on the Vercel Edge runtime (`export const config = { runtime: "edge" }`), required since the handler signature is the Fetch API `(Request) => Response` style.
 - CI added: GitHub Actions workflow (`.github/workflows/ci.yml`) runs typecheck + lint on every PR and on push to `main`.
 - Setup checklist fully done: `.env` has a real `FOOTBALL_DATA_API_KEY`, mockups for all MVP screens done in Stitch AI (Home, Competition view, Team view, each in dark/light + desktop/mobile, plus loading/error/empty states on the Competition view as the reference pattern).
-- No frontend feature code written yet — `App.tsx` is still the default Vite template.
+- TanStack Router wired up (`__root.tsx`, `index.tsx`, `competition.$ligueCode.tsx`), Navbar with light/dark theme toggle (`ThemeProvider`, CSS variables in `index.css`).
+- Home view done: static list of the 5 competitions (hardcoded client-side, no API call needed to enumerate them), linking to `/competition/$ligueCode`. Passed an accessibility pass: `<h1>` added, decorative arrow icon `aria-hidden`, alt text fixed, logo badge with fixed light background so crests stay legible in dark mode, `--accent-color` given a separate lighter value for `[data-theme="dark"]` (~7.5:1 contrast against `--bg`), responsive breakpoints at 770px and 360px.
 
 ## Next step
 
-- Home view: list of the 5 competitions, consuming `/api/standings` (or a dedicated lightweight list — TBD whether that needs its own endpoint or just the 5 hardcoded competition codes/names client-side, since football-data.org doesn't need a call just to enumerate them).
-- Then: Competition view (standings table, sortable, searchable).
+- Competition view (standings table, sortable, searchable).

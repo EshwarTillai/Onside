@@ -10,7 +10,7 @@
 
 ## MVP
 - [x] `/api` proxy route(s) to football-data.org.
-- [ ] Home: list of the 5 competitions.
+- [x] Home: list of the 5 competitions.
 - [ ] Competition view: standings table, sortable columns.
 - [ ] Competition view: search/filter by team name (debounced).
 - [ ] Team view: full season history (score, opponent, date, home/away).

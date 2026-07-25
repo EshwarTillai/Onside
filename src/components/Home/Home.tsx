@@ -42,19 +42,20 @@ export default function Home () {
 
     return (
         <div className='list-container'>
+            <h1>Major Leagues</h1>
             <ul className="list-competition">
                 
                     {listLeague.map(ligue => 
                         <li key={ligue.id}>
                             <Link className='league-link' to="/competition/$ligueCode" params={{ligueCode: ligue.code}}>
                                 <div className='ligue-container'>
-                                    <img alt={ligue.code} src={ligue.img} />
+                                    <img alt={`image logo ${ligue.code}`} src={ligue.img} />
                                     <div>
                                         <span className='ligue-name'>{ligue.name}</span>
                                         <span className='ligue-country'>{ligue.country}</span>
                                     </div>         
                                 </div>
-                                <FaArrowRight color='var(--accent-color)'/>
+                                <FaArrowRight aria-hidden='true' color='var(--accent-color)'/>
                             </Link>
                         </li>
                     )}
