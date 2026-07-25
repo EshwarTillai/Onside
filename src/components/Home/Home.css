@@ -1,0 +1,93 @@
+.list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.list-container h1 {
+    color: var(--accent-color);
+}
+.list-competition {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.list-competition li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    border:1px solid var(--accent-color);
+    width: 400px;
+    border-radius: 5px;
+    background-color: var(--bg);
+}
+.list-competition li a {
+    padding: 16px 24px;
+    -webkit-box-shadow: 5px 25px 50px -8px rgba(33,33,33,0.88); 
+box-shadow: 5px 25px 50px -8px rgba(33,33,33,0.88);
+}   
+
+.list-competition img {
+    max-width: 80px;
+    background-color: rgb(249, 252, 252);
+    padding: 4px 16px ;
+    border-radius: 8px;
+}
+
+.list-competition li div {
+    flex-direction: column;
+    display: flex;
+}
+
+.ligue-name {
+    font-size: 16px;
+}
+
+.ligue-country {
+    font-size: 12px;
+}
+
+
+.list-competition li .ligue-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.league-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text);
+}
+
+@media (max-width:770px) {
+    .list-competition {
+        padding: 0;
+        width: 90%;
+    }
+    .list-competition li {
+        width: 90%;
+    }
+}
+@media (max-width:360px) {
+    .ligue-name {
+        font-size: 14px;
+    }
+
+    .ligue-country {
+        font-size: 10px;
+    }
+}
