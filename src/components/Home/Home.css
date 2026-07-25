@@ -1,0 +1,60 @@
+.list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.list-competition {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.list-competition li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    border:1px solid rgb(0, 0, 0);
+    width: 400px;
+    border-radius: 5px;
+    padding: 16px 24px;
+}
+
+.list-competition img {
+    max-width: 80px;
+}
+
+.list-competition li div {
+    flex-direction: column;
+    display: flex;
+}
+
+.ligue-name {
+    font-size: 16px;
+}
+
+.ligue-country {
+    font-size: 12px;
+}
+
+
+.list-competition li .ligue-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.league-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+}
