@@ -10,7 +10,9 @@ function RootComponent() {
   return (
     <ThemeProvider >
         <Navbar/>
-      <Outlet />
+        <div className='main'>
+          <Outlet />
+        </div>
     </ThemeProvider>
   )
 }

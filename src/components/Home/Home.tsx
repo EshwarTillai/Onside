@@ -54,7 +54,7 @@ export default function Home () {
                                         <span className='ligue-country'>{ligue.country}</span>
                                     </div>         
                                 </div>
-                                <FaArrowRight/>
+                                <FaArrowRight color='var(--accent-color)'/>
                             </Link>
                         </li>
                     )}
