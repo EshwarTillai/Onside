@@ -1,13 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 } 
  :root {
-    --bg: white;
+    --bg: rgb(228, 226, 226);
     --text: black;
     --accent-color: #500570
-
+  --pitch: #17b95c;
+  --pitch-dark: #0f8a44;
+  --gold: #e8b923;
+  --red: #e5484d;
+  --card: #121a2c;
+  --row-alt: #16203570;
+  --border: #223052;
+  --text-dim: #7e8bab;
   }
 
   [data-theme="dark"] {
@@ -15,7 +25,9 @@ body {
     --text: white;
     --accent-color:#DA8FFA
   }
-
+  .third-color {
+    color:var(--accent-color)
+  }
   body {
     background: var(--bg);
     color: var(--text);
