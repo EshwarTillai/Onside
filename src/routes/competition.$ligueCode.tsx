@@ -1,12 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
-import Standing from '../components/Standing/Standing'
-
+import { Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/competition/$ligueCode')({
   component: RouteComponent,
+    loader: (args)=>{
+      return {crumb:args.params.ligueCode}
+    }
 })
 
 function RouteComponent() {
-    const params = Route.useParams()
-   return <Standing code={params.ligueCode}/>
-}
+   return <Outlet/>
+} 

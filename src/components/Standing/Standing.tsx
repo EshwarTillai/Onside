@@ -145,7 +145,7 @@ export default function Standing({code}: {code:string}){
                     x.table).filter(filterItem => filterItem.team.name.toLowerCase().includes(debouncedSearch.toLowerCase())).map(item => 
                         <tr key={item.team.id}> 
                         <td>{item.position} </td>
-                        <td className="teamName"><Link to="/team/$teamId" params={{teamId: item.team.id.toString()}}><img aria-hidden="true" className="teamLogo" src={item.team.crest}/> {item.team.name} </Link></td>
+                        <td className="teamName"><Link to="/competition/$ligueCode/team/$teamId" params={{teamId: item.team.id.toString(), ligueCode: code}}><img aria-hidden="true" className="teamLogo" src={item.team.crest}/> {item.team.name} </Link></td>
                         <td> {item.playedGames}</td>
                         <td>{item.won} </td>
                         <td>{item.draw} </td>
