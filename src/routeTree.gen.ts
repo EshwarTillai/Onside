@@ -11,7 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CompetitionLigueCodeRouteImport } from './routes/competition.$ligueCode'
-import { Route as TeamTeamIdRouteImport } from './routes/team.$teamId'
+import { Route as CompetitionLigueCodeIndexRouteImport } from './routes/competition.$ligueCode.index'
+import { Route as CompetitionLigueCodeTeamTeamIdRouteImport } from './routes/competition.$ligueCode.team.$teamId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +24,57 @@ const CompetitionLigueCodeRoute = CompetitionLigueCodeRouteImport.update({
   path: '/competition/$ligueCode',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TeamTeamIdRoute = TeamTeamIdRouteImport.update({
-  id: '/team/$teamId',
-  path: '/team/$teamId',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const CompetitionLigueCodeIndexRoute =
+  CompetitionLigueCodeIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => CompetitionLigueCodeRoute,
+  } as any)
+const CompetitionLigueCodeTeamTeamIdRoute =
+  CompetitionLigueCodeTeamTeamIdRouteImport.update({
+    id: '/team/$teamId',
+    path: '/team/$teamId',
+    getParentRoute: () => CompetitionLigueCodeRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/competition/$ligueCode': typeof CompetitionLigueCodeRoute
-  '/team/$teamId': typeof TeamTeamIdRoute
+  '/competition/$ligueCode': typeof CompetitionLigueCodeRouteWithChildren
+  '/competition/$ligueCode/': typeof CompetitionLigueCodeIndexRoute
+  '/competition/$ligueCode/team/$teamId': typeof CompetitionLigueCodeTeamTeamIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/competition/$ligueCode': typeof CompetitionLigueCodeRoute
-  '/team/$teamId': typeof TeamTeamIdRoute
+  '/competition/$ligueCode': typeof CompetitionLigueCodeIndexRoute
+  '/competition/$ligueCode/team/$teamId': typeof CompetitionLigueCodeTeamTeamIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/competition/$ligueCode': typeof CompetitionLigueCodeRoute
-  '/team/$teamId': typeof TeamTeamIdRoute
+  '/competition/$ligueCode': typeof CompetitionLigueCodeRouteWithChildren
+  '/competition/$ligueCode/': typeof CompetitionLigueCodeIndexRoute
+  '/competition/$ligueCode/team/$teamId': typeof CompetitionLigueCodeTeamTeamIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/competition/$ligueCode' | '/team/$teamId'
+  fullPaths:
+    | '/'
+    | '/competition/$ligueCode'
+    | '/competition/$ligueCode/'
+    | '/competition/$ligueCode/team/$teamId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/competition/$ligueCode' | '/team/$teamId'
-  id: '__root__' | '/' | '/competition/$ligueCode' | '/team/$teamId'
+  to: '/' | '/competition/$ligueCode' | '/competition/$ligueCode/team/$teamId'
+  id:
+    | '__root__'
+    | '/'
+    | '/competition/$ligueCode'
+    | '/competition/$ligueCode/'
+    | '/competition/$ligueCode/team/$teamId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CompetitionLigueCodeRoute: typeof CompetitionLigueCodeRoute
-  TeamTeamIdRoute: typeof TeamTeamIdRoute
+  CompetitionLigueCodeRoute: typeof CompetitionLigueCodeRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -75,20 +93,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompetitionLigueCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/team/$teamId': {
-      id: '/team/$teamId'
+    '/competition/$ligueCode/': {
+      id: '/competition/$ligueCode/'
+      path: '/'
+      fullPath: '/competition/$ligueCode/'
+      preLoaderRoute: typeof CompetitionLigueCodeIndexRouteImport
+      parentRoute: typeof CompetitionLigueCodeRoute
+    }
+    '/competition/$ligueCode/team/$teamId': {
+      id: '/competition/$ligueCode/team/$teamId'
       path: '/team/$teamId'
-      fullPath: '/team/$teamId'
-      preLoaderRoute: typeof TeamTeamIdRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/competition/$ligueCode/team/$teamId'
+      preLoaderRoute: typeof CompetitionLigueCodeTeamTeamIdRouteImport
+      parentRoute: typeof CompetitionLigueCodeRoute
     }
   }
 }
 
+interface CompetitionLigueCodeRouteChildren {
+  CompetitionLigueCodeIndexRoute: typeof CompetitionLigueCodeIndexRoute
+  CompetitionLigueCodeTeamTeamIdRoute: typeof CompetitionLigueCodeTeamTeamIdRoute
+}
+
+const CompetitionLigueCodeRouteChildren: CompetitionLigueCodeRouteChildren = {
+  CompetitionLigueCodeIndexRoute: CompetitionLigueCodeIndexRoute,
+  CompetitionLigueCodeTeamTeamIdRoute: CompetitionLigueCodeTeamTeamIdRoute,
+}
+
+const CompetitionLigueCodeRouteWithChildren =
+  CompetitionLigueCodeRoute._addFileChildren(CompetitionLigueCodeRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CompetitionLigueCodeRoute: CompetitionLigueCodeRoute,
-  TeamTeamIdRoute: TeamTeamIdRoute,
+  CompetitionLigueCodeRoute: CompetitionLigueCodeRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

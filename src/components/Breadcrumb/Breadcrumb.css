@@ -1,0 +1,15 @@
+.breadcrumb ol {
+    display: flex;
+    justify-content: flex-start;
+    gap:  8px;
+    align-items: center;
+    font-size: 16px;
+    padding-left: 12px;
+    list-style: none;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: "\276F";
+    content: "\276F" / "";
+    margin-left: 8px;
+}

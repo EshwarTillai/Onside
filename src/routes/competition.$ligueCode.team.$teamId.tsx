@@ -1,8 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 
-export const Route = createFileRoute('/team/$teamId')({
+export const Route = createFileRoute('/competition/$ligueCode/team/$teamId')({
   component: RouteComponent,
+  loader: (args)=>{
+      return {crumb:args.params.teamId}
+    }
 })
 
 function RouteComponent() {

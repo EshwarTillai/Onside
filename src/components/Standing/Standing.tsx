@@ -1,50 +1,18 @@
-import { Link } from "@tanstack/react-router"
+import { getRouteApi, Link } from "@tanstack/react-router"
 import { useState } from "react"
-import useFetch from "../../customHooks/useFetch"
 import { FaArrowUp, FaArrowDown } from "react-icons/fa"
 import './Standing.css'
 import useDebounce from "../../customHooks/useDebounce"
-interface Team {
-  "id": number,
-  "name": string,
-  "shortName": string,
-  "tla": string,
-  "crest": string
-}
+import type { Row } from "../../types/utils"
+const standings = getRouteApi('/competition/$ligueCode')
 
-interface Row {
-    "position": number,
-    "team":Team,
-    "playedGames": number,
-    "form": string,
-    "won": number,
-    "draw": number,
-    "lost": number,
-    "points": number,
-    "goalsFor": number,
-    "goalsAgainst": number,
-    "goalDifference": number
-}
-interface Standing  {
-            "stage": string,
-            "type": string,
-            "group": null | string,
-            "table": Row[],
-}
-interface StandingsResponse {
-  "filters": {
-        "season": string
-    },
-    standings: Standing[]
-}
 export default function Standing({code}: {code:string}){
     const [sortKey, setSortKey] = useState<'position'|'points'|'won'|'defeat'|'goal difference'|'draw'|'played'|null>('position')
     const [sortDir, setSortDir] = useState<'asc'|'desc'>('asc')
-    const {data, loading, error} = useFetch<StandingsResponse>('/api/standings?competition=' + code)
+    const {standingData} = standings.useLoaderData()
     const [searchTerm,setSearchTerm] = useState<string>('')
     const debouncedSearch = useDebounce(searchTerm,500)
     function getComparator(){
-        if(data!= null){
             switch (sortKey) {
                 case ('position'):
                         if(sortDir == 'asc'){
@@ -91,7 +59,7 @@ export default function Standing({code}: {code:string}){
                 default:return null
             }
             
-        }
+        
     }
     function handleSort(key: typeof sortKey){
         if (key === sortKey){
@@ -106,9 +74,7 @@ export default function Standing({code}: {code:string}){
         }
     }
 
-    if(error) return <span> {error}</span>
-    if (loading) return <span> Loading</span>
-    if (data != null) {
+    
         const comparator = getComparator()
         return(
             <div className="standing-container " >
@@ -140,12 +106,12 @@ export default function Standing({code}: {code:string}){
                     </tr>
                 </thead>
                 <tbody>
-                    {data.standings.filter(e => e.type ==="TOTAL").map(x =>
+                    {standingData.standings.filter(e => e.type ==="TOTAL").map(x =>
                     (comparator ?   [...x.table].sort(comparator) :
                     x.table).filter(filterItem => filterItem.team.name.toLowerCase().includes(debouncedSearch.toLowerCase())).map(item => 
                         <tr key={item.team.id}> 
                         <td>{item.position} </td>
-                        <td className="teamName"><Link to="/team/$teamId" params={{teamId: item.team.id.toString()}}><img aria-hidden="true" className="teamLogo" src={item.team.crest}/> {item.team.name} </Link></td>
+                        <td className="teamName"><Link to="/competition/$ligueCode/team/$teamId" params={{teamId: item.team.id.toString(), ligueCode: code}}><img aria-hidden="true" className="teamLogo" src={item.team.crest}/> {item.team.name} </Link></td>
                         <td> {item.playedGames}</td>
                         <td>{item.won} </td>
                         <td>{item.draw} </td>
@@ -164,6 +130,4 @@ export default function Standing({code}: {code:string}){
 </div>
             </div>
         )
-    }
-    if (data == null) return <span>An error occured</span>
 }
