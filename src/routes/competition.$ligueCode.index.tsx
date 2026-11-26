@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import Standing from '../components/Standing/Standing'
 export const Route = createFileRoute('/competition/$ligueCode/')({
-  component: RouteComponent,
+  component: RouteComponent
 })
 
 function RouteComponent() {
